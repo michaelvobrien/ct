@@ -157,7 +157,7 @@ end
 OptionParser.new do |opts|
   opts.banner = "Usage: ct [options] [file]"
 
-  opts.on("-n", "--noop", "Run in no operation mode") do |n|
+  opts.on("-n", "--noop", "Run in no-operation mode (dry-run)") do |n|
     @_settings.noop = n
   end
   opts.on("-i", "--interactive", "Run in interactive mode") do |i|
