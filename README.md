@@ -1,6 +1,6 @@
 ## Overview
 
-A simple tool for writing ruby scripts to manage your Mac OS X system.
+A proof-of-concept tool for writing ruby scripts to manage a Mac OS X system.
 
 ## Examples
 
