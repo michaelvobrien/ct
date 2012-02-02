@@ -115,12 +115,12 @@ def file(path, content)
   end
 end
 
-def script(name, should_run, perform)
+def script(description, should_run, commands)
   if should_run
-    info "[DO] #{name.capitalize}"
-    sh_out perform
+    info "[DO] #{description.capitalize}"
+    sh_out commands
   else
-    info "[SKIP] #{name.capitalize}"
+    info "[SKIP] #{description.capitalize}"
   end
 end
 
