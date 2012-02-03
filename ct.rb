@@ -124,21 +124,37 @@ def script(description, should_run, commands)
   end
 end
 
-def _installed?(name)
+def _clear_brew_list_cache
+  @_brew_list = nil
+end
+
+def _clear_brew_outdated_cache
+  @_brew_outdated = nil
+end
+
+def _brew_list
   @_brew_list ||= `brew list`
-  @_brew_list.match(/^#{name}$/)
+end
+
+def _brew_outdated
+  @_brew_outdated ||= `brew outdated`
+end
+
+def _installed?(name)
+  _brew_list.match(/^#{name}$/)
 end
 
 def _install(name)
+  _clear_brew_list_cache
   sh_out "brew install #{name}"
 end
 
 def _outdated?(name)
-  @_brew_outdated ||= `brew outdated`
-  @_brew_outdated.match(/^#{name}$/)
+  _brew_outdated.match(/^#{name}$/)
 end
 
 def _upgrade(name)
+  _clear_brew_outdated_cache
   sh_out "brew upgrade #{name}"
 end
 
