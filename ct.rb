@@ -125,7 +125,8 @@ def script(description, should_run, commands)
 end
 
 def _installed?(name)
-  sh_exitstatus "brew list | grep -q -e '^#{name}$'"
+  @_brew_list ||= `brew list`
+  @_brew_list.match(/^#{name}$/)
 end
 
 def _install(name)
@@ -133,7 +134,8 @@ def _install(name)
 end
 
 def _outdated?(name)
-  sh_exitstatus "brew outdated | grep -q -e '^#{name}$'"
+  @_brew_outdated ||= `brew outdated`
+  @_brew_outdated.match(/^#{name}$/)
 end
 
 def _upgrade(name)
