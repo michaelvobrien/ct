@@ -12,22 +12,20 @@ A proof-of-concept tool for writing ruby scripts to manage a Mac OS X system.
 
 ### Package
 
-    package "name"
+    package 'name'
     
 ### File
 
-    redis_conf_path = File.join(current_path, "redis.conf")
-    file "/usr/local/etc/redis", File.read(redis_conf_path)
+    redis_config_path = File.join(data_path, 'redis.conf')
+    file '/usr/local/etc/redis.conf', File.read(redis_config_path)
 
 ### Script
 
-    MYSQL_DB_PATH = "/usr/local/var/mysql"
-    unless File.directory?(MYSQL_DB_PATH)
-      script "initialize mysql database", true, <<-EOS
-        unset TMPDIR
-        mysql_install_db --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-      EOS
-    end
+    should_init_mysql_db = (not File.directory? '/usr/local/var/mysql')
+    script 'initialize mysql database', should_init_mysql_db, <<-EOS
+      unset TMPDIR
+      mysql_install_db --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+    EOS
 
 ## Print Helpers
 
